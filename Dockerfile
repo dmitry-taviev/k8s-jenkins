@@ -7,7 +7,7 @@ USER root
 RUN curl -sSL https://get.docker.com/ | sed 's/docker-engine/docker-engine=1.6.1-0~jessie/' | sh
 
 #install various dependencies
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
 		wget \
 		php5-cli \
 		jq \
