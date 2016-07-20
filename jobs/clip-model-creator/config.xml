@@ -9,13 +9,13 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <refspec>+refs/heads/clip-model-creator:refs/remotes/origin/clip-model-creator</refspec>
-          <url>git@bitbucket.org:apply/smrt-services.git</url>
+          <refspec>+refs/heads/master:refs/remotes/origin/master</refspec>
+          <url>git@bitbucket.org:apply/smrt-clipmodelcreator.git</url>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
         <hudson.plugins.git.BranchSpec>
-          <name>refs/heads/clip-model-creator</name>
+          <name>refs/heads/master</name>
         </hudson.plugins.git.BranchSpec>
       </branches>
       <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
