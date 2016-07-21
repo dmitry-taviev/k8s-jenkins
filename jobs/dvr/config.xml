@@ -9,13 +9,13 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <refspec>+refs/heads/dvr:refs/remotes/origin/dvr</refspec>
-          <url>git@bitbucket.org:apply/smrt-services.git</url>
+          <refspec>+refs/heads/master:refs/remotes/origin/master</refspec>
+          <url>git@bitbucket.org:apply/smrt-dvrpack.git</url>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
         <hudson.plugins.git.BranchSpec>
-          <name>refs/heads/dvr</name>
+          <name>refs/heads/master</name>
         </hudson.plugins.git.BranchSpec>
       </branches>
       <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
