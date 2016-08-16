@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H/15 * * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>identity=&apos;/root/.ssh/kube_aws_rsa&apos;
+chmod 400 $identity
+
+for node in `kubectl get nodes -o jsonpath=&apos;{.items[*].metadata.name}&apos;`; do 
+        ip=$(kubectl get node $node -o jsonpath=&apos;{.status.addresses[?(@.type == &quot;ExternalIP&quot;)].address}&apos;)
+    ssh -tt -i $identity -o &quot;StrictHostKeyChecking no&quot; admin@$ip &lt;&lt;-EOF
+        sudo su
+        dangling=\$(docker images --filter dangling=true -q)
+        [ -n &quot;\$dangling&quot; ] &amp;&amp; docker rmi \$dangling
+        df -h
+        exit
+        exit
+        EOF
+done</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
