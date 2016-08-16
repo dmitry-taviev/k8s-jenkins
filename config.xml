@@ -95,6 +95,7 @@
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>image-pull-secret-updater</string>
+        <string>garbage-collector</string>
       </jobNames>
       <jobFilters/>
       <columns>
@@ -109,7 +110,7 @@
       <recurse>false</recurse>
     </listView>
   </views>
-  <primaryView>All</primaryView>
+  <primaryView>Services</primaryView>
   <slaveAgentPort>-1</slaveAgentPort>
   <label></label>
   <crumbIssuer class="hudson.security.csrf.DefaultCrumbIssuer">
