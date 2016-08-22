@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>*/2 * * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>autoscaling_group_name=&apos;smart-cluster-minion-group-eu-central-1a&apos;
+region=&apos;eu-central-1&apos;
+event=$(kubectl get events -o json | jq &apos;.items[0]&apos;)
+event_type=$(echo $event | jq -r &apos;.type&apos;)
+event_reason=$(echo $event | jq -r &apos;.reason&apos;)
+if [ $event_type = &apos;Warning&apos; -a $event_reason = &apos;FailedScheduling&apos; ]
+then
+        event_message=$(echo $event | jq -r &apos;.message&apos;)
+    if [[ $event_message == *&quot;failed to fit in any node&quot;* ]]
+        then
+        current_capacity=$(aws autoscaling describe-auto-scaling-groups --region=$region --auto-scaling-group-name $autoscaling_group_name | jq &apos;.AutoScalingGroups[0].DesiredCapacity&apos;)
+        total_active=$(kubectl get nodes -o json | jq &apos;.items | length&apos;)
+        desired_capacity=$(($total_active + 1))
+        if [ &quot;$desired_capacity&quot; -gt &quot;$current_capacity&quot; ]
+        then
+                echo &quot;scaling up..&quot;;
+                aws autoscaling set-desired-capacity --region=$region --auto-scaling-group-name $autoscaling_group_name --desired-capacity $desired_capacity --honor-cooldown
+        fi
+        fi
+else
+        echo &quot;all fine&quot;
+fi</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

@@ -95,6 +95,8 @@
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator"/>
         <string>image-pull-secret-updater</string>
+        <string>autoscaler</string>
+        <string>elasticsearch-rotator</string>
         <string>garbage-collector</string>
       </jobNames>
       <jobFilters/>
