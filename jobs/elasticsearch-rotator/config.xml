@@ -25,7 +25,7 @@ ok=0
 timeout=3
 until [ $ok -eq 1 ]; do
         json=$(curl --insecure -u $user:$pass &quot;$server/$elastic_path/_cluster/health?level=indices&quot;)
-        status=$(echo $json | jq .status | tr -d '"')
+        status=$(echo $json | jq -r .status)
     if [ $status != &apos;red&apos; ]; then
         echo &quot;status ok\n&quot;
         ok=1
