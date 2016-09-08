@@ -36,6 +36,7 @@ pipeline-stage-view:latest
 plain-credentials:latest
 scm-api:latest
 script-security:1.19
+simple-theme-plugin:0.3
 slack:2.0.1
 ssh-credentials:latest
 ssh-slaves:latest
