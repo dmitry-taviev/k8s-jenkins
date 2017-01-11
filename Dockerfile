@@ -60,3 +60,7 @@ VOLUME /root/.dockercfg
 VOLUME /root/.kube/config
 #volume for aws credentials
 VOLUME /root/.aws/credentials
+
+#by Atis for angular frontend
+RUN curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -
+RUN apt-get install -y nodejs && apt-get autoclean
